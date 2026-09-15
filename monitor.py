@@ -8,8 +8,9 @@ from selectolax.parser import HTMLParser
 from datetime import datetime
 
 # ============ تنظیمات ============
-BALE_TOKEN = "660467365:T9tUwKkgVRbJ9MJrXOdhaUNC9U7zzxE-COU"
-CHAT_ID = 693477997
+import os
+BALE_TOKEN = os.environ.get("BALE_TOKEN", "")
+CHAT_ID = int(os.environ.get("CHAT_ID", "0"))
 SOURCE_FILE = "approved_prices.csv"      # 32 محصول در سایتت
 STATE_FILE = "last_known_prices.json"    # قیمت‌های آخرین دفعه
 LOG_FILE = "monitor.log"
