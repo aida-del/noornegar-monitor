@@ -129,6 +129,15 @@ def check_changes():
     df = pd.read_csv(SOURCE_FILE)
     products = df.to_dict("records")
     log(f"🔍 شروع بررسی {len(products)} محصول...")
+
+
+# فقط دوربین‌های Sony و Canon (نه سه پایه، نه لنز)
+df = df[
+    df['title'].str.contains('Sony|Canon', case=False, na=False) &
+    ~df['title'].str.contains('Tripod|سه پایه|Lens|لنز|Flash|فلاش|Bag|کیف|Battery|باتری|Charger|شارژر|Filter|فیلتر|Strap|Card|کارت', case=False, na=False)
+]
+print(f"تعداد محصولات بعد از فیلتر: {len(df)}")
+
     
     results = asyncio.run(scrape_all(products))
     state = load_state()
